@@ -27,17 +27,16 @@ const pizzaController = {
           res.status(400).json(err);
         });
     },
-}
 
-// createPizza
-createPizza({ body }, res) {
+    // createPizza
+    createPizza({ body }, res) {
     Pizza.create(body)
       .then(dbPizzaData => res.json(dbPizzaData))
       .catch(err => res.status(400).json(err));
   },
 
-// update pizza by id
-updatePizza({ params, body }, res) {
+    // update pizza by id
+    updatePizza({ params, body }, res) {
     Pizza.findOneAndUpdate({ _id: params.id }, body, { new: true })
       .then(dbPizzaData => {
         if (!dbPizzaData) {
@@ -49,7 +48,7 @@ updatePizza({ params, body }, res) {
       .catch(err => res.status(400).json(err));
   },
 
-// delete pizza
+  // delete pizza
 deletePizza({ params }, res) {
     Pizza.findOneAndDelete({ _id: params.id })
       .then(dbPizzaData => {
@@ -61,4 +60,6 @@ deletePizza({ params }, res) {
       })
       .catch(err => res.status(400).json(err));
   }
+}
+
 module.exports = pizzaController;
